@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "clock.h"
 #include "orderedLinkedList.h"
-#include "Person.h"
 
 /* Program name: yarn.cpp
 * Author: Carr O'Connor
@@ -11,12 +11,12 @@
 */
 
 int main(){
-    orderedLinkedList<Person> list;
-    Person fam1 = Person("Carr", 31);
-    Person fam2 = Person("Kevin", 22);
-    Person fam3 = Person("Caroline", 28);
-    Person fam4 = Person("Sarah", 30);
-    Person fam5 = Person("Cali", 30);
+    orderedLinkedList<clockType> list;
+    clockType fam1 = clockType(23, 30, 30, TWENTYFOUR, AM);
+    clockType fam2 = clockType(22, 15, 15, TWENTYFOUR, AM);
+    clockType fam3 = clockType(0, 30, 14, TWENTYFOUR, AM);
+    clockType fam4 = clockType(10, 9, 8, TWENTYFOUR, AM);
+    clockType fam5 = clockType(15, 0, 0, TWENTYFOUR, AM);
 
     list.insert(fam1);
     list.insert(fam2);
@@ -26,12 +26,6 @@ int main(){
 
     std::ostream& os = std::cout;
 
-    list.print(os);
-
-    list.insertFirst(Person("Test", 0));
-    list.insertLast(Person("Test", 100));
-    
-    os.clear();
     list.print(os);
 
     bool found = list.search(fam1);
