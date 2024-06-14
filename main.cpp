@@ -4,10 +4,10 @@
 #include "orderedLinkedList.h"
 #include "person.h"
 
-/* Program name: yarn.cpp
+/* Program name: orderedLinkedList.cpp
 * Author: Carr O'Connor
-* Date last updated: 6/9/2024
-* Purpose: Build yarn objects
+* Date last updated: 6/14/2024
+* Purpose: build a templated linked list
 */
 
 int main(){
@@ -25,20 +25,19 @@ int main(){
     list.insert(fam5);
 
     std::ostream& os = std::cout;
-
+    os << "Ordered Linked List: \n";
     list.print(os);
-
-    list.insertFirst(Person("Test", 0));
-    list.insertLast(Person("Test", 100));
-    
     os.clear();
-    list.print(os);
 
+    os << "\nSearching for item ... \n";
     bool found = list.search(fam1);
-    os.clear();
-    os << found << std::endl;
+    if(found) os << "Item found! \n";
+    else os << "Item not found! \n";
 
+    os << "\nDeleting item... \n"; 
     list.deleteNode(fam1);
+    os << "Item deleted! \n\nOrdered Linked List: \n";
+
     os.clear();
     list.print(os);
 

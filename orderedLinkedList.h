@@ -3,6 +3,7 @@
 
 #include "linkedList.h"
 
+//template the class so generic types can use and compilier can create code needed while we only worry about one area
 template <class Type>
 class orderedLinkedList : public linkedList<Type>
 {
@@ -14,6 +15,7 @@ public:
 	void deleteNode(const Type &deleteItem);
 };
 
+//insert function that that keeps track of first and last
 template <class Type>
 void orderedLinkedList<Type>::insert(const Type& newItem){
     if (this->first == nullptr || newItem < *this->first->info) {
@@ -38,11 +40,13 @@ void orderedLinkedList<Type>::insert(const Type& newItem){
     }
 }
 
+//search for item in linked list
 template <class Type>
 bool orderedLinkedList<Type>::search(const Type &searchItem) const {
 	node<Type>* temp = this->first;
     while (temp != nullptr) {
-        if (*(temp->info) == searchItem) {
+        //dereference to compare items
+        if (*(temp->info) == searchItem) { 
             return true;
         }
         temp = temp->link;
@@ -56,7 +60,8 @@ void orderedLinkedList<Type>::insertFirst(const Type &newItem){
 	newNode->info = new Type(newItem);
 	newNode->link = this->first;
 	this->first = newNode;
-	if (this->last == nullptr) {
+    //also set to last if null
+	if (this->last == nullptr) { 
         this->last = newNode;
     }
 }
@@ -79,6 +84,7 @@ void orderedLinkedList<Type>::deleteNode(const Type &deleteItem){
 	node<Type> *temp = this->first;
     node<Type> *prev = nullptr;
     while (temp != nullptr) {
+        //dereference to compare items
         if (*(temp->info) == deleteItem) {
             if (prev == nullptr) {
                 this->first = temp->link;
