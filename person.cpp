@@ -1,4 +1,4 @@
-#include "Person.h"
+#include "person.h"
 
 Person::Person(const std::string &name, int age) : name(name), age(age) {}
 

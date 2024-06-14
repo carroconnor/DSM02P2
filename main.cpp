@@ -13,8 +13,35 @@
 // There will also be a small unit test. If you name the templated class orderedLinkedList, extend the LinkedList class provided in the starter code, 
 // and implement the insert function, then the unit tests should be able to run and test your code.
 
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "orderedLinkedList.h"
+#include "person.h"
+
+/* Program name: yarn.cpp
+* Author: Carr O'Connor
+* Date last updated: 6/9/2024
+* Purpose: Build yarn objects
+*/
 
 int main(){
+    orderedLinkedList<Person> *list;
+    Person fam1 = Person("Carr", 31);
+    Person fam2 = Person("Sarah", 30);
+    Person fam3 = Person("Cali", 30);
+    Person fam4 = Person("Caroline", 28);
+    Person fam5 = Person("Kevin", 22);
+
+    list->insert(fam1);
+    list->insert(fam2);
+    list->insert(fam3);
+    list->insert(fam4);
+    list->insert(fam5);
+
+    std::ostream& os = std::cout;
+
+    list->print(os);
+
     return 0;
 }
