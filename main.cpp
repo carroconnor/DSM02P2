@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "orderedLinkedList.h"
-#include "person.h"
+#include "Person.h"
 
 /* Program name: yarn.cpp
 * Author: Carr O'Connor
