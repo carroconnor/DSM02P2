@@ -16,20 +16,25 @@ public:
 
 template <class Type>
 void orderedLinkedList<Type>::insert(const Type& newItem){
-	node<Type>* newNode = new node<Type>();
-    newNode->info = new Type(newItem);
-    newNode->link = nullptr;
-
-    if (this->first == nullptr || *newNode->info < *this->first->info) {
-        newNode->link = this->first;
-        this->first = newNode;
-    } else {
-        node<Type>* current = this->first;
-        while (current->link && *current->link->info < *newNode->info) {
-            current = current->link;
-        }
-        newNode->link = current->link;
-        current->link = newNode;
+    if (this->first == nullptr || newItem < *this->first->info) {
+        insertFirst(newItem);
+    } else{
+		node<Type>* current = this->first;
+		while (current->link && *current->link->info < newItem) {
+			current = current->link;
+		}
+		if(current->link == nullptr){
+			insertLast(newItem);
+		}
+		else{
+			node<Type>* newNode = new node<Type>();
+			newNode->info = new Type(newItem);
+			newNode->link = current->link;
+			current->link = newNode;
+			if(newNode->link == nullptr){
+				this->last = newNode;
+			}
+		}
     }
 }
 
@@ -51,45 +56,49 @@ void orderedLinkedList<Type>::insertFirst(const Type &newItem){
 	newNode->info = new Type(newItem);
 	newNode->link = this->first;
 	this->first = newNode;
+	if (this->last == nullptr) {
+        this->last = newNode;
+    }
 }
 
 template <class Type>
 void orderedLinkedList<Type>::insertLast(const Type &newItem){
 	node<Type>* newNode = new node<Type>();
-	newNode->info = new Type(newItem);
-	if(this->last == nullptr){
-		this->last = newNode;
-		return;
-	}
-	node<Type> *temp = this->first;
-	while (temp->link != nullptr)
-	{
-		temp = temp->link;
-	}
-	temp->link = newNode;
+    newNode->info = new Type(newItem);
+    newNode->link = nullptr;
+    if (this->last == nullptr) {
+        this->first = this->last = newNode;
+    } else {
+        this->last->link = newNode;
+        this->last = newNode;
+    }
 }
 
 template <class Type>
 void orderedLinkedList<Type>::deleteNode(const Type &deleteItem){
 	node<Type> *temp = this->first;
-	node<Type> *prev = nullptr;
-	while(temp != nullptr){
-		if(*(temp->info) == deleteItem){
-			if(prev == nullptr){
-				this->first = temp->link;
-				delete temp;
-				return;
-			}
-			else{
-				prev->link = temp->link;
-				delete temp;
-				return;
-			}
-		}
-		else{
-			temp = temp->link;
-		}
-	}
+    node<Type> *prev = nullptr;
+    while (temp != nullptr) {
+        if (*(temp->info) == deleteItem) {
+            if (prev == nullptr) {
+                this->first = temp->link;
+                if (this->first == nullptr) {
+                    this->last = nullptr;
+                }
+                delete temp;
+            } else {
+                prev->link = temp->link;
+                if (temp->link == nullptr) {
+                    this->last = prev;
+                }
+                delete temp;
+            }
+            return;
+        } else {
+            prev = temp;
+            temp = temp->link;
+        }
+    }
 }
 
 #endif
