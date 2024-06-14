@@ -1,7 +1,18 @@
 #ifndef OLLIST_H
 #define OLLIST_H
 
-class orderedLinkedList : public linkedList
+#include "linkedList.h"
 
-							  don't forget the template
+template <class Type>
+class orderedLinkedList : public linkedList<Type>
+{
+public:
+	void insert(const Type &newITem) = 0;
+};
+
+template <class Type>
+void orderedLinkedList<Type>::insert(const Type &newItem){
+
+}
+
 #endif
